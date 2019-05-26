@@ -36,7 +36,7 @@ You can also provide longer flag names:
 
 ```bash
 set -o errexit
-set -o noundef
+set -o nounset
 set -o pipefail
 ```
 
@@ -46,7 +46,7 @@ Both of the above blocks of code are equivalent.
 a nonzero status code, with some mostly-reasonable exceptions (e.g. commands
 in an if statement test or used as part of an expression with `&&` or `||`).
 
-`u`/`-o noundef` makes it an error to reference an undefined variable or
+`u`/`-o nounset` makes it an error to reference an undefined variable or
 parameter.
 
 `-o pipefail` causes pipelines to return a nonzero status if any commands in a
@@ -55,7 +55,7 @@ pipeline return nonzero. This fixes a tricky edge case that can slip past
 command, even if earlier commands failed. This becomes a problem if we really
 wanted those earlier commands to work.
 
-### Top-level code in main(); sourced scripts should never have side effects
+### Sourced scripts should never have side effects
 
 It's very common to write shell scripts that execute code at the top level.
 This poses two problems: First, any helper code in these scripts is impossible
@@ -66,11 +66,34 @@ script's behavior and makes it harder to understand.
 
 Instead, a script's main code should live in a function named `main` that is
 only called if the script has been called directly. This can be accomplished
-with the `BASH_SOURCE` variable.
+with the `BASH_SOURCE` variable:
+
+```bash
+main() {
+    echo main method stuff goes here
+}
+[[ "${#BASH_SOURCE[@]}" -eq 1 ]] && main
+```
+
+You also see variants based on the comparing script name and `BASH_SOURCE`, like
+so:
+
+```bash
+[[ "${BASH_SOURCE[0]}" == "$0" ]] && main
+```
+
+Personally, I like the one based on array length because it's a little cleaner.
+If `BASH_SOURCE` only has one item, you know that you're at the top-level, and
+otherwise you're being sourced.
+
+Beausae I like encapsulation, here's a simple function encapsulating this basic
+check. Instead of checking whether `BASH_SOURCE` has one item, it checks if it
+has 2, which will only be true if the function is called from the top level of a
+script.
 
 ```bash
 is_main() {
-    [[ "${BASH_SOURCE[1]}" == "$0" ]]
+    [[ "${#BASH_SOURCE[@]}" -eq 2 ]]
 }
 ```
 
@@ -469,3 +492,4 @@ foo() called
 - [ ] traps
 - [ ] mktemp
 - [ ] declaring functions dynamically with `eval` (requires `declare -g`)
+- [ ] arithmetic using ((  ))
