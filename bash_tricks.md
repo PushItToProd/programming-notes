@@ -97,6 +97,15 @@ is_main() {
 }
 ```
 
+### Declare your variables
+
+TODO
+
+* `declare`
+* `local`
+* `readonly`
+* `export`
+
 ### Quote your variables
 
 Here are some important things to understand about bash argument passing:
@@ -486,6 +495,11 @@ hello world
 $ foo
 foo() called
 ```
+
+`unset` has some interesting behavior when a function and variable share the
+same name. Variables are unset before functions, so if you simply call `unset
+foo`, only the variable will be removed. However, you can pass the flags `-f`
+or `-v` to `unset` to explicitly remove a function or a variable, respectively.
 
 # TODO
 
