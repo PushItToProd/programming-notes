@@ -462,6 +462,7 @@ TODO
 
 * parameter expansion
 * `declare -n`
+* pass arrays by reference
 
 ## Advanced
 
