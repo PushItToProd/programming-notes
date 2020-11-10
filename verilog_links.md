@@ -11,5 +11,7 @@
   * https://verificationguide.com/systemverilog/systemverilog-clocking-block/
   * http://www.asic-world.com/systemverilog/clocking1.html
 * binding - http://www.asic-world.com/systemverilog/assertions22.html
+* program block - http://www.asic-world.com/systemverilog/program1.html
+* delays - http://www.verilog.renerta.com/source/vrg00011.htm
 
 * an FPGA I got recommended: https://www.terasic.com.tw/cgi-bin/page/archive.pl?No=593
