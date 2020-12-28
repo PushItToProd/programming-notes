@@ -136,19 +136,19 @@ $ touch foo bar baz 'foo bar baz'   # create our files
 $ ls                                # yep, they're there
  bar   baz   foo  'foo bar baz'
 $ for f in foo*; do                 # naively try to delete them
->   echo $f
+>   echo "Deleting '$f'"
 >   rm $f
 > done
-foo
-foo bar baz
+Deleting 'foo'
+Deleting 'foo bar baz'
 rm: cannot remove 'foo': No such file or directory
 $ ls                                # whoops!
 'foo bar baz'
 ```
 
-Expected outcome: the files named "foo" and "foo bar baz" are removed.
+Expected outcome: the files named `foo` and `foo bar baz` are removed.
 
-Actual outcome: every file except "foo bar baz" is removed.
+Actual outcome: every file _except_ `foo bar baz` is removed.
 
 ## Basic
 
@@ -204,7 +204,7 @@ echo "Hello ${name:-world}!"
 ##### Using `-`/`:-`
 
 We can easily test if a variable is set using the `-` form with an empty
-default:
+default value.
 
 ```bash
 if [[ -z "${name:-}" ]]; then
