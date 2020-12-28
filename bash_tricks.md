@@ -3,6 +3,37 @@
 A collection of bash tricks found in my bash spelunking, ranging from essential
 to outright evil.
 
+## Getting help
+
+`man` and `help` are your friends!
+
+Skimming `man bash` is highly recommended, just to see what kinds of obscure
+features it has.
+
+`help` is a Bash built-in that provides information about Bash built-ins.
+
+```
+$ help help
+help: help [-dms] [pattern ...]
+    Display information about builtin commands.
+    
+    Displays brief summaries of builtin commands.  If PATTERN is
+    specified, gives detailed help on all commands matching PATTERN,
+    otherwise the list of help topics is printed.
+    
+    Options:
+      -d        output short description for each topic
+      -m        display usage in pseudo-manpage format
+      -s        output only a short usage synopsis for each topic matching
+                PATTERN
+    
+    Arguments:
+      PATTERN   Pattern specifying a help topic
+    
+    Exit Status:
+    Returns success unless PATTERN is not found or an invalid option is given.
+```
+
 ## Ground rules
 
 These are things I consider to be essential for safe and productive
@@ -508,3 +539,6 @@ or `-v` to `unset` to explicitly remove a function or a variable, respectively.
 - [ ] mktemp
 - [ ] declaring functions dynamically with `eval` (requires `declare -g`)
 - [ ] arithmetic using ((  ))
+- [ ] tput
+- [ ] function locals
+- [ ] while-read
