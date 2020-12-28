@@ -103,29 +103,27 @@ with the `BASH_SOURCE` variable:
 main() {
     echo main method stuff goes here
 }
-[[ "${#BASH_SOURCE[@]}" -eq 1 ]] && main
+if [[ "$BASH_SOURCE" == "$0" ]]; then
+    main
+fi
 ```
 
-You also see variants based on the comparing script name and `BASH_SOURCE`, like
-so:
+`BASH_SOURCE` is an array, so you can also see this implemented like so:
 
 ```bash
-[[ "${BASH_SOURCE[0]}" == "$0" ]] && main
+if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then
+    main
+fi
 ```
 
-Personally, I like the one based on array length because it's a little cleaner.
-If `BASH_SOURCE` only has one item, you know that you're at the top-level, and
-otherwise you're being sourced.
+(By default, referencing an array name without a subscript returns only the 0th
+element.)
 
-Beausae I like encapsulation, here's a simple function encapsulating this basic
-check. Instead of checking whether `BASH_SOURCE` has one item, it checks if it
-has 2, which will only be true if the function is called from the top level of a
-script.
+You can also implement this like so, but note that this will fail if `errexit`
+is set, since it returns nonzero if the condition is false.
 
 ```bash
-is_main() {
-    [[ "${#BASH_SOURCE[@]}" -eq 2 ]]
-}
+[[ "$BASH_SOURCE" == "$0" ]] && main
 ```
 
 ### Declare your variables
