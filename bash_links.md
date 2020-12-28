@@ -9,6 +9,8 @@ How to write bash
 * [how to read a file](https://mywiki.wooledge.org/BashFAQ/001)
 * [BATS - shell unit testing](https://github.com/bats-core/bats-core)
 * [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
+* Shellcheck
+    * [Checks](https://github.com/koalaman/shellcheck/wiki/Checks)
 
 Other
 -----
