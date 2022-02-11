@@ -1,0 +1,1 @@
+* Get all non-essential expenditures over $800: `h reg Expenses not:Expenses:Core 'amt:>=800'`
