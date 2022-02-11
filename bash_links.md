@@ -11,6 +11,7 @@ How to write bash
 * [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
 * Shellcheck
     * [Checks](https://github.com/koalaman/shellcheck/wiki/Checks)
+* [Unofficial Bash Strict Mode](http://redsymbol.net/articles/unofficial-bash-strict-mode/)
 
 Other
 -----
